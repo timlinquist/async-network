@@ -8,5 +8,10 @@ class NetworkList
   end
 
   def async_data
+    threads = @networks.map {|network|
+      Thread.new {
+        [network.name, network.data]
+      }
+    }.map(&:join).map(&:value)
   end
 end
