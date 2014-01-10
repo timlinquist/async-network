@@ -1,18 +1,13 @@
 class NetworksController < ApplicationController
   def index
-    start_time = Time.now
-    @data = networks.data
-    end_time = Time.now
+    collection = if params[:async]
+                  :async_data
+                else
+                  :data
+                end
 
-    stars = "*" * 50
-    Rails.logger.info(stars +
-                      "time: #{end_time - start_time}" +
-                     stars)
-  end
-
-  def async
     start_time = Time.now
-    @data = networks.async_data
+    @data = networks.send(collection)
     end_time = Time.now
 
     stars = "*" * 50
