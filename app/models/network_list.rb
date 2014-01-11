@@ -1,6 +1,7 @@
 class NetworkList
   def initialize
-    @networks = [TwitterNetwork.new, FacebookNetwork.new]
+    twitters = Array.new(8){ TwitterNetwork.new }
+    @networks = twitters
   end
 
   def data
